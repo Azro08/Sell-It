@@ -2,19 +2,12 @@ package com.azrosk.sell_it
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.sell_it.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+    private val binding by viewBinding(ActivityMainBinding::bind)
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }

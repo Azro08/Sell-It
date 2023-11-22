@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".shared.auth.AuthActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/sell_it_logo"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/pink" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/classroomViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>
