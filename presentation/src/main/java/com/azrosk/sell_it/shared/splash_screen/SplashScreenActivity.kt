@@ -9,7 +9,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.azrosk.sell_it.MainActivity
+import com.azrosk.sell_it.users.MainActivity
 import com.azrosk.sell_it.R
 import com.azrosk.sell_it.admin.AdminActivity
 import com.azrosk.sell_it.databinding.ActivitySplashScreenBinding
@@ -28,13 +28,13 @@ class SplashScreenActivity : AppCompatActivity(R.layout.activity_splash_screen) 
     lateinit var authManager: AuthManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setAnimation()
-
     }
 
     private fun setAnimation() {
         val screenWidth = resources.displayMetrics.widthPixels.toFloat()
-        val animationDuration = 5200L // Duration of the longest animation
+        val animationDuration = 4800L // Duration of the longest animation
 
         val cartAnimation = ObjectAnimator.ofFloat(
             binding.imageViewCart,

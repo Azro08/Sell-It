@@ -32,7 +32,7 @@
             android:name=".shared.auth.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".users.MainActivity"
             android:exported="false">
         </activity>
     </application>

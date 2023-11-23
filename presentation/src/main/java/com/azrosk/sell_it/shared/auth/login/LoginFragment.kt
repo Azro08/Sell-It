@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.sell_it.util.AuthManager
-import com.azrosk.sell_it.MainActivity
+import com.azrosk.sell_it.users.MainActivity
 import com.azrosk.sell_it.R
 import com.azrosk.sell_it.databinding.FragmentLoginBinding
 import com.azrosk.sell_it.util.Constants
