@@ -1,9 +1,7 @@
 package com.azrosk.sell_it.users
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,10 +17,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val binding by viewBinding(ActivityMainBinding::bind)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
         supportActionBar?.hide()
         binding.bottomNavView.background = null
         binding.bottomNavView.menu.getItem(2).isEnabled = false
         setBottomNavBar()
+        binding.fab.setOnClickListener {
+            findNavController(R.id.nav_host).navigate(R.id.addProductFragment)
+        }
     }
 
     private fun setBottomNavBar() {
@@ -48,8 +50,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in topLevelDestinations) {
                 binding.bottomNavView.visibility = View.VISIBLE
+                binding.fab.visibility = View.VISIBLE
+                binding.bottomAppBar.visibility  = View.VISIBLE
             } else {
                 binding.bottomNavView.visibility = View.GONE
+                binding.fab.visibility = View.GONE
+                binding.bottomAppBar.visibility  = View.GONE
             }
         }
 
