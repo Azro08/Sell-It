@@ -1,6 +1,7 @@
 package com.azrosk.data.repository
 
 import android.net.Uri
+import android.util.Log
 import com.azrosk.data.model.Category
 import com.azrosk.data.model.Product
 import com.google.firebase.FirebaseException
@@ -20,6 +21,7 @@ class ProductsRepository @Inject constructor(
     private val categoryCollection =
         firestore.collection("category")
     private val productsCollection = firestore.collection("products")
+    private val favoritesCollection = firestore.collection("favorites")
 
     // Function to fetch all products
     suspend fun getAllProducts(): List<Product> {
@@ -33,14 +35,17 @@ class ProductsRepository @Inject constructor(
     }
 
     // Function to get products for a specific user
-    suspend fun getOtherUsersProducts(userId: String): List<Product> {
+    suspend fun getOtherUsersProducts(category : String): List<Product> {
+        val userId = firebaseAuth.currentUser?.uid ?: ""
         return try {
             val querySnapshot = productsCollection
-                .whereNotEqualTo("userId", userId) // Assuming userId field in products
+                .whereNotEqualTo("userId", userId)
+                .whereEqualTo("category", category)
                 .get().await()
             querySnapshot.toObjects(Product::class.java)
         } catch (e: Exception) {
             // Handle exceptions
+            Log.d("ProductsRepository", "${e.message}")
             emptyList()
         }
     }
@@ -107,11 +112,6 @@ class ProductsRepository @Inject constructor(
         }
     }
 
-    // Function to get products for the current user
-    suspend fun getCurrentUsersProducts(): List<Product> {
-        val currentUserId = firebaseAuth.currentUser?.uid ?: ""
-        return getOtherUsersProducts(currentUserId)
-    }
 
     suspend fun getCategoryList(): List<Category>? {
         val categoryList = mutableListOf<Category>()
@@ -128,5 +128,18 @@ class ProductsRepository @Inject constructor(
             null
         }
     }
+
+
+    suspend fun saveProductToFavorites(product: Product) : String {
+        return try {
+            val userId = firebaseAuth.currentUser?.uid
+            val favProductId = userId + product.id
+            favoritesCollection.document(favProductId).set(product).await()
+            "Done"
+        }catch (e : FirebaseException){
+            e.message.toString()
+        }
+    }
+
 
 }
