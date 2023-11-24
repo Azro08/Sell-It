@@ -43,8 +43,8 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         getCategories()
         binding.buttonSave.setOnClickListener {
-            binding.buttonSave.visibility  = View.GONE
-            binding.loadingDetailsGif.visibility  = View.VISIBLE
+            binding.buttonSave.visibility = View.GONE
+            binding.loadingDetailsGif.visibility = View.VISIBLE
             if (areAllFieldsFilled()) {
                 if (imagesList.isEmpty()) saveProduct()
                 else uploadImage()
@@ -141,8 +141,8 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
                     }
 
                     is ScreenState.Error -> {
-                        binding.buttonSave.visibility  = View.VISIBLE
-                        binding.loadingDetailsGif.visibility  = View.GONE
+                        binding.buttonSave.visibility = View.VISIBLE
+                        binding.loadingDetailsGif.visibility = View.GONE
                         Log.d("ImageUriError", state.message.toString())
                         Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT)
                             .show()
@@ -178,10 +178,9 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
                     Toast.makeText(requireContext(), "Uploaded", Toast.LENGTH_SHORT)
                         .show()
                     findNavController().popBackStack()
-                }
-                else {
-                    binding.buttonSave.visibility  = View.VISIBLE
-                    binding.loadingDetailsGif.visibility  = View.GONE
+                } else {
+                    binding.buttonSave.visibility = View.VISIBLE
+                    binding.loadingDetailsGif.visibility = View.GONE
                     if (it.isNotEmpty()) Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
                         .show()
                 }

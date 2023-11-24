@@ -34,7 +34,7 @@ class ProductImagesPagerAdapter(
         // Using Glide for example:
         Glide.with(context)
             .load(imageUris[position])
-            .error(R.drawable.image_container_background)
+            .error(R.drawable.sell_it_logo)
             .apply(RequestOptions().centerCrop())
             .into(imageView)
 
