@@ -18,7 +18,11 @@
         android:id="@+id/favoritesFragment"
         android:name="com.azrosk.sell_it.users.favorite.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/nav_fav_details"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addProductFragment"
         android:name="com.azrosk.sell_it.users.add_product.AddProductFragment"

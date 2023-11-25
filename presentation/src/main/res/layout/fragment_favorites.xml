@@ -4,12 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".users.favorite.FavoritesFragment"
-    android:background="@color/light_gray">
+    android:background="@color/light_gray"
+    android:padding="4dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:fontFamily="cursive"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>
