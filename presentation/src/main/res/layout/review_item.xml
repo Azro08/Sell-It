@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_gray"
+    android:background="@color/white"
     android:layout_margin="15dp"
     android:padding="6dp">
 
@@ -25,11 +25,11 @@
 
         <TextView
             android:id="@+id/textViewReviewText"
-            android:background="@drawable/rounded_edges_background"
+            android:background="@drawable/pink_rounded_edges_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:textColor="@color/black"
+            android:padding="8dp"
+            android:textColor="@color/white"
             android:textSize="16sp"
             tools:text = "Nice product"
             android:layout_margin="6dp"/>
@@ -38,6 +38,7 @@
             android:id="@+id/textViewReviewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_marginStart="10dp"
             tools:text = "2023-10-10"
             android:textSize="14sp"/>

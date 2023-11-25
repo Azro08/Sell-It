@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:padding="6dp"
+    tools:context=".users.order_product.OrderProductFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewProdName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/order_details"
+            android:textColor="@color/black"
+            android:fontFamily="cursive"
+            android:textSize="26sp"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:hint="@string/full_name"
+            android:layout_margin="8dp"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:hint="@string/address"
+            android:layout_margin="8dp"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/editTextNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:hint="@string/note"
+            android:layout_margin="8dp"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/amount"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp">
+
+            <ImageButton
+                android:id="@+id/buttonInc"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/add_icon"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/textViewOrderAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text = "@string/_1"/>
+
+            <ImageButton
+                android:id="@+id/buttonDec"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/remove_icon"
+                android:importantForAccessibility="no" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_price"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/textViewOrderTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            tools:text = "200 руб"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delivery_method"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_margin="10dp"/>
+
+
+        <RadioGroup
+            android:id="@+id/radioGroupOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <RadioButton
+                android:id="@+id/rbSameDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/same_day_messenger_service" />
+
+            <RadioButton
+                android:id="@+id/rbNextDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/next_day_ground_delivery" />
+
+            <RadioButton
+                android:id="@+id/rbPickUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_up" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_method"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_margin="10dp"/>
+
+
+        <RadioGroup
+            android:id="@+id/radioGroupPaymentType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cash" />
+
+            <RadioButton
+                android:id="@+id/radioButtonCreditCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/credit_card" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonSubmitOrder"
+            android:textColor="@color/white"
+            android:background="@drawable/rounde_gradient_background"
+            android:text="@string/submit"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

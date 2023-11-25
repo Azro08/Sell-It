@@ -5,9 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.data.model.Product
@@ -36,6 +38,9 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         getDetails(productId)
         binding.buttonSendFeedback.setOnClickListener {
             if (binding.editTextReview.text.toString().isNotEmpty()) sendFeedback(productId)
+        }
+        binding.buttonOrder.setOnClickListener {
+            findNavController().navigate(R.id.nav_details_order, bundleOf(Pair(Constants.PRODUCT_ID, productId)))
         }
     }
 
@@ -128,6 +133,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         val price = "${product.price} руб."
         binding.textViewPrice.text = price
         binding.textViewDate.text = product.date
+        binding.textViewAmount.text  = product.amount.toString()
 
         binding.buttonCallOwner.setOnClickListener {
             callOwner()

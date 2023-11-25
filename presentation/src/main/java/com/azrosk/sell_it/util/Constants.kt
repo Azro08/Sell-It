@@ -12,6 +12,7 @@ object Constants {
     const val ADMIN = "admin"
     const val USER = "user"
     const val PRODUCT_ID = "product_id"
+    const val AMOUNT = "amount"
 
     fun generateRandomId(): String {
         val characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

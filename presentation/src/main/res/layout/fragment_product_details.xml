@@ -53,6 +53,23 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/black"
+                android:text = "@string/amount"
+                android:padding="8dp" />
+
+            <TextView
+                android:id="@+id/textViewAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:padding="8dp" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 android:text = "@string/description"
                 android:padding="8dp" />
 
@@ -144,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:background="@drawable/rounded_edges_background"
                 android:padding="8dp" />
 
 
