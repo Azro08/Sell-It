@@ -108,7 +108,7 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
             viewModel.addedToFav.collect {
                 if (it == "Done") Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT)
                     .show()
-                else Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+                else Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }

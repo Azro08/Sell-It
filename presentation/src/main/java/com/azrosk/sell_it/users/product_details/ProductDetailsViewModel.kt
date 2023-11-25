@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azrosk.data.model.Product
 import com.azrosk.data.model.Review
+import com.azrosk.data.model.Users
 import com.azrosk.data.repository.ProductsRepository
 import com.azrosk.data.repository.UsersRepository
 import com.azrosk.sell_it.util.ScreenState
@@ -24,8 +25,8 @@ class ProductDetailsViewModel @Inject constructor(
     private val _reviewText = MutableStateFlow<ScreenState<String>?>(ScreenState.Loading())
     val reviewText = _reviewText
 
-    private val _userImg = MutableStateFlow("")
-    val userImg = _userImg
+    private val _user = MutableStateFlow(Users())
+    val user = _user
 
     fun getProductDetails(productId: String) = viewModelScope.launch {
         productsRepository.getProductDetails(productId).let {
@@ -42,10 +43,10 @@ class ProductDetailsViewModel @Inject constructor(
         getProductDetails(productId)
     }
 
-    fun getUserImage(uid: String) = viewModelScope.launch {
+    fun getUser(uid: String) = viewModelScope.launch {
         usersRepository.getUser(uid).let {
-            if (it != null) _userImg.value = it.imageUrl
-            else _userImg.value = ""
+            if (it != null) _user.value = it
+            else _user.value = Users()
         }
     }
 

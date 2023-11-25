@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azrosk.data.model.Category
 import com.azrosk.data.model.Product
+import com.azrosk.data.repository.FavoritesRepository
 import com.azrosk.data.repository.ProductsRepository
 import com.azrosk.sell_it.util.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductsListViewModel @Inject constructor(
-    private val productsRepository: ProductsRepository
+    private val productsRepository: ProductsRepository,
+    private val favoritesRepository: FavoritesRepository
 ) : ViewModel() {
 
     private val _productsList = MutableStateFlow<ScreenState<List<Product>?>>(ScreenState.Loading())
@@ -41,7 +43,7 @@ class ProductsListViewModel @Inject constructor(
     }
 
     fun addProductToFavorites(product: Product) = viewModelScope.launch {
-        productsRepository.saveProductToFavorites(product).let {
+        favoritesRepository.saveProductToFavorites(product).let {
             _addedToFav.value = it
         }
     }

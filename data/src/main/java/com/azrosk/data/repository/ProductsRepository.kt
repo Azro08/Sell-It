@@ -130,19 +130,6 @@ class ProductsRepository @Inject constructor(
         }
     }
 
-
-    suspend fun saveProductToFavorites(product: Product) : String {
-        return try {
-            val userId = firebaseAuth.currentUser?.uid
-            val favProductId = userId + product.id
-            favoritesCollection.document(favProductId).set(product).await()
-            "Done"
-        }catch (e : FirebaseException){
-            e.message.toString()
-        }
-    }
-
-
     suspend fun getProductDetails(productId: String): Product? {
         return try {
             val querySnapshot = productsCollection

@@ -1,5 +1,7 @@
 package com.azrosk.sell_it.users.product_details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -24,12 +26,13 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
     private val binding by viewBinding(FragmentProductDetailsBinding::bind)
     private val viewModel: ProductDetailsViewModel by viewModels()
     private var profileImgUrl = ""
+    private var ownerPhoneNum = ""
     @Inject lateinit var firebaseAuth: FirebaseAuth
     private var reviewsRvAdapter : ReviewsRvAdapter? = null
     private var imagesViewPagerAdapter : ProductDetailsImagesPagerAdapter? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val productId = arguments?.getString(Constants.PRODUCT_ID) ?: ""
-        getUsersImg()
+        getUsersData()
         getDetails(productId)
         binding.buttonSendFeedback.setOnClickListener {
             if (binding.editTextReview.text.toString().isNotEmpty()) sendFeedback(productId)
@@ -79,12 +82,13 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         }
     }
 
-    private fun getUsersImg() {
+    private fun getUsersData() {
         val uid = firebaseAuth.currentUser?.uid ?: ""
         lifecycleScope.launch {
-            viewModel.getUserImage(uid)
-            viewModel.userImg.collect {
-                profileImgUrl = it
+            viewModel.getUser(uid)
+            viewModel.user.collect {
+                profileImgUrl = it.imageUrl
+                ownerPhoneNum = it.phoneNumber
             }
         }
     }
@@ -125,12 +129,21 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         binding.textViewPrice.text = price
         binding.textViewDate.text = product.date
 
+        binding.buttonCallOwner.setOnClickListener {
+            callOwner()
+        }
+
         imagesViewPagerAdapter = ProductDetailsImagesPagerAdapter(requireContext() ,product.imagesUrl)
 
         reviewsRvAdapter = ReviewsRvAdapter(product.reviews)
         binding.recyclerViewReviews.setHasFixedSize(true)
         binding.recyclerViewReviews.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewReviews.adapter = reviewsRvAdapter
+    }
+
+    private fun callOwner() {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", ownerPhoneNum, null))
+        startActivity(intent)
     }
 
     private fun handleError(msg: String) {
