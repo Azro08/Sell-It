@@ -9,7 +9,11 @@
         android:id="@+id/productsListFragment"
         android:name="com.azrosk.sell_it.users.products.ProductsListFragment"
         android:label="fragment_products_list"
-        tools:layout="@layout/fragment_products_list" />
+        tools:layout="@layout/fragment_products_list" >
+        <action
+            android:id="@+id/nav_list_to_prod_details"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.azrosk.sell_it.users.favorite.FavoritesFragment"
@@ -30,4 +34,9 @@
         android:name="com.azrosk.sell_it.users.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.azrosk.sell_it.users.product_details.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" />
 </navigation>

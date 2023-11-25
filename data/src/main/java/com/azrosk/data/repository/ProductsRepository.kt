@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.azrosk.data.model.Category
 import com.azrosk.data.model.Product
+import com.azrosk.data.model.Review
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -140,6 +141,51 @@ class ProductsRepository @Inject constructor(
             e.message.toString()
         }
     }
+
+
+    suspend fun getProductDetails(productId: String): Product? {
+        return try {
+            val querySnapshot = productsCollection
+                .whereEqualTo("id", productId)
+                .get().await()
+
+            val productsList = querySnapshot.toObjects(Product::class.java)
+            if (productsList.isNotEmpty()) {
+                productsList[0] // Assuming productId is unique, returning the first item
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun submitReview(productId: String, review: Review): String {
+        val userEmail = firebaseAuth.currentUser?.email ?: ""
+        return try {
+
+            // Get the current product details
+            val product = getProductDetails(productId)
+
+            if (product != null) {
+                val updatedReviews = product.reviews.toMutableList()
+                updatedReviews.add(review)
+
+                // Update the reviews list in the product document
+                productsCollection.document(productId)
+                    .update("reviews", updatedReviews)
+                    .await()
+
+                "Done"
+            } else {
+                "Product not found"
+            }
+        } catch (e: Exception) {
+            // Handle exceptions
+            e.message.toString()
+        }
+    }
+
 
 
 }

@@ -1,6 +1,8 @@
 package com.azrosk.sell_it.util
 
 import android.content.Context
+import com.azrosk.data.model.Users
+import com.azrosk.domain.model.User
 
 class AuthManager(private val context: Context) {
 
