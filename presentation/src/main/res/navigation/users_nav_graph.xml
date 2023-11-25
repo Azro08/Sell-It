@@ -42,5 +42,14 @@
         android:id="@+id/productDetailsFragment"
         android:name="com.azrosk.sell_it.users.product_details.ProductDetailsFragment"
         android:label="fragment_product_details"
-        tools:layout="@layout/fragment_product_details" />
+        tools:layout="@layout/fragment_product_details" >
+        <action
+            android:id="@+id/nav_details_order"
+            app:destination="@id/orderProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderProductFragment"
+        android:name="com.azrosk.sell_it.users.order_product.OrderProductFragment"
+        android:label="fragment_order_product"
+        tools:layout="@layout/fragment_order_product" />
 </navigation>

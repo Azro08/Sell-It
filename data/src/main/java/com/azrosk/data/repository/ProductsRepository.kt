@@ -52,16 +52,17 @@ class ProductsRepository @Inject constructor(
     }
 
     // Function to update a product
-    suspend fun updateProduct(productId: String, updatedProduct: Product) {
+    suspend fun updateProduct(productId: String, updatedProduct: Map<String, Any>) {
         try {
             productsCollection
                 .document(productId)
-                .set(updatedProduct)
+                .update(updatedProduct)
                 .await()
         } catch (e: Exception) {
             // Handle exceptions
         }
     }
+
 
     // Function to add a new product
     suspend fun addProduct(newProduct: Product): String {

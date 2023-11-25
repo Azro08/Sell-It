@@ -165,7 +165,7 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
             name = productName,
             description = description,
             price = price,
-            quantity = amount,
+            amount = amount,
             state = state,
             category = category,
             userId = userId!!,
