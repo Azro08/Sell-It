@@ -12,4 +12,6 @@ data class Product(
     val category : String = "",
     val quantity : Int = 0,
     val state : String = "", //old/new
+    val date : String = "",
+    val reviews : List<Review> = emptyList(),
 )

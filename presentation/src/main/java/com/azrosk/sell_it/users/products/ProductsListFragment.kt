@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,7 @@ import com.azrosk.data.model.Category
 import com.azrosk.data.model.Product
 import com.azrosk.sell_it.R
 import com.azrosk.sell_it.databinding.FragmentProductsListBinding
+import com.azrosk.sell_it.util.Constants
 import com.azrosk.sell_it.util.ScreenState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -96,7 +99,7 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
     }
 
     private fun navToDetails(product: Product) {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.nav_list_to_prod_details, bundleOf(Pair(Constants.PRODUCT_ID, product.id)))
     }
 
     private fun saveToFav(product: Product) {
