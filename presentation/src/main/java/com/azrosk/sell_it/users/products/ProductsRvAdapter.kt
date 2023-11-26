@@ -1,5 +1,7 @@
 package com.azrosk.sell_it.users.products
 
+import android.annotation.SuppressLint
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +11,7 @@ import com.azrosk.sell_it.databinding.ProductItemBinding
 import com.bumptech.glide.Glide
 
 class ProductsRvAdapter(
-    private val productList: List<Product>,
+    private var productList: List<Product>,
     private val itemListener: (product: Product) -> Unit,
     private val favoriteListener: (product: Product) -> Unit
 ) : RecyclerView.Adapter<ProductsRvAdapter.ProductsViewHolder>() {
@@ -26,7 +28,7 @@ class ProductsRvAdapter(
             binding.textViewProductName.text = curProduct.name
             binding.textViewProductPrice.text = priceTag
             Glide.with(binding.root)
-                .load(curProduct.imagesUrl)
+                .load(Uri.parse(curProduct.imagesUrl[0]))
                 .error(R.drawable.sell_it_logo)
                 .into(binding.imageViewProductImage)
             product = curProduct
@@ -37,6 +39,12 @@ class ProductsRvAdapter(
             binding.buttonAddProdToFav.setOnClickListener { favoriteListener(product!!) }
         }
 
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateFoodList(newProductList: List<Product>) {
+        productList = newProductList.toMutableList()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {

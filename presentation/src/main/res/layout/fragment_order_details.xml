@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".users.notification.OrderDetailsFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text = "@string/amount"/>
+
+    <TextView
+        android:id="@+id/textViewOrderDetailsAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="3dp"
+        tools:text = "200"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text = "@string/price"/>
+
+    <TextView
+        android:id="@+id/textViewOrderDetailsTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="3dp"
+        tools:text = "200 rub"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text = "@string/note"/>
+
+    <TextView
+        android:id="@+id/textViewOrderDetailsNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="3dp"
+        tools:text = "not"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/buttonApproveOrder"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:text="@string/approve"/>
+
+
+    <Button
+        android:id="@+id/buttonDenyOrder"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pink"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:text="@string/deny"/>
+
+</LinearLayout>

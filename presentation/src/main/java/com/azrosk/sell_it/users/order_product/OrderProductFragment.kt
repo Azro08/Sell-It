@@ -29,6 +29,7 @@ class OrderProductFragment : Fragment(R.layout.fragment_order_product) {
     private var totalAmount = 1
     private var totalPrice = 0.0
     private var ownerId: String = ""
+    private var productName = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         productId = arguments?.getString(Constants.PRODUCT_ID) ?: ""
         getProductDetails(productId)
@@ -46,6 +47,7 @@ class OrderProductFragment : Fragment(R.layout.fragment_order_product) {
                     totalAmount = it.amount
                     val price = it.price
                     ownerId = it.userId
+                    productName = it.name
                     binding.textViewProdName.text = it.name
                     totalPrice = it.price
                     binding.textViewOrderTotalPrice.text = totalPrice.toString()
@@ -92,24 +94,25 @@ class OrderProductFragment : Fragment(R.layout.fragment_order_product) {
         var note = binding.editTextNote.text.toString()
         if (note.isEmpty()) note = ""
         val deliveryAddress = binding.editTextAddress.text.toString()
-        val date = Constants.getCurrentDate()
         val deliveryMethod = getDeliveryMethod()
         val paymentMethod = getPaymentMethod()
         val status = "pending"
 
         val order = Order(
+            id = Constants.generateRandomId(),
             productId = productId,
             orderedBy = fullName,
             ownerId = ownerId,
             deliveryAddress = deliveryAddress,
-            date = date,
+            date = Constants.getCurrentDate(),
             deliveryMethod = deliveryMethod,
             paymentMethod = paymentMethod,
             status = status,
             orderedById = uid,
             amount = orderAmount,
             totalPrice = totalPrice,
-            note = note
+            note = note,
+            productName = productName
         )
         lifecycleScope.launch {
             viewModel.makeOrder(order)

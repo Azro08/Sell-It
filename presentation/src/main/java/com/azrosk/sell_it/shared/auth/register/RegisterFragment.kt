@@ -76,7 +76,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private fun uploadImage() {
         lifecycleScope.launch {
             Log.d("ImageUri", imageUri.toString())
-            viewModel.uploadImageAndGetUri(firebaseAuth.currentUser?.uid!!, imageUri)
+            val uid = firebaseAuth.currentUser?.uid ?: ""
+            viewModel.uploadImageAndGetUri(uid, imageUri)
             viewModel.imageUploaded.collect { state ->
                 when (state) {
                     is ScreenState.Loading -> {}
@@ -110,6 +111,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 imageUrl = imageUrl
                 )
             lifecycleScope.launch {
+                binding.buttonSignup.visibility = View.GONE
                 viewModel.register(newUser, password)
                 viewModel.registerState.collect{
                     if (it == "Done") {
@@ -117,6 +119,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         startActivity(Intent(requireActivity(), AuthActivity::class.java))
                         requireActivity().finish()
                     } else {
+                        binding.buttonSignup.visibility = View.VISIBLE
                         if (it != "") Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         Log.d("Register", it)
                     }

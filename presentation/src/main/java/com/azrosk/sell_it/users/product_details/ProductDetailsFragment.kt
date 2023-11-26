@@ -140,6 +140,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         }
 
         imagesViewPagerAdapter = ProductDetailsImagesPagerAdapter(requireContext() ,product.imagesUrl)
+        binding.viewPagerImages.adapter = imagesViewPagerAdapter
 
         reviewsRvAdapter = ReviewsRvAdapter(product.reviews)
         binding.recyclerViewReviews.setHasFixedSize(true)

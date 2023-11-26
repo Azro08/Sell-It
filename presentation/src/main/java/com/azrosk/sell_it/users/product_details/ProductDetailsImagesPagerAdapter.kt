@@ -1,6 +1,7 @@
 package com.azrosk.sell_it.users.product_details
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,7 @@ class ProductDetailsImagesPagerAdapter(
         // You can use Picasso, Glide, or any other image loading library here
         // Using Glide for example:
         Glide.with(context)
-            .load(imageUris[position])
+            .load(Uri.parse(imageUris[position]))
             .error(R.drawable.sell_it_logo)
             .apply(RequestOptions().centerCrop())
             .into(imageView)
