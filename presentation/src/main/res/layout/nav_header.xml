@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/llCard"
+    android:background="@color/pink"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/headerIvAccount"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/turquoise_profile_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/headerTvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textColor="@color/white"
+        tools:text="Full Name"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/headerTvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/gray"
+        tools:text="account_email"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="20dp"/>
+
+
+
+</LinearLayout>

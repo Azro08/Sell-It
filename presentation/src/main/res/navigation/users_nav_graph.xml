@@ -52,4 +52,23 @@
         android:name="com.azrosk.sell_it.users.order_product.OrderProductFragment"
         android:label="fragment_order_product"
         tools:layout="@layout/fragment_order_product" />
+    <dialog
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.azrosk.sell_it.users.notification.OrderDetailsFragment"
+        android:label="fragment_order_details"
+        tools:layout="@layout/fragment_order_details" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.azrosk.sell_it.users.notification.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/nav_notification_order_details"
+            app:destination="@id/orderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatsListFragment"
+        android:name="com.azrosk.sell_it.users.chat.ChatsListFragment"
+        android:label="fragment_chats_list"
+        tools:layout="@layout/fragment_chats_list" />
 </navigation>

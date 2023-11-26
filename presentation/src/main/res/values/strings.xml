@@ -38,7 +38,17 @@
     <string name="submit">submit</string>
     <string name="credit_card">Credit card</string>
     <string name="cash">Cash</string>
+    <string name="cancel">Cancel</string>
     <string name="payment_method">Payment method</string>
     <string name="_1">1</string>
     <string name="total_price">Total price</string>
+    <string name="pending">Pending</string>
+    <string name="notifications">Notifications</string>
+    <string name="approve">Approve</string>
+    <string name="deny">Deny</string>
+    <string name="logout">Logout</string>
+    <string name="chat">Chat</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
