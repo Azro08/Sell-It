@@ -37,7 +37,14 @@
         android:id="@+id/settingsFragment"
         android:name="com.azrosk.sell_it.users.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/nav_settings_lang"
+            app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/nav_settings_send_feedback"
+            app:destination="@id/sendFeedBackFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.azrosk.sell_it.users.product_details.ProductDetailsFragment"
@@ -85,4 +92,14 @@
         android:name="com.azrosk.sell_it.users.edit_product.EditProductFragment"
         android:label="fragment_edit_product"
         tools:layout="@layout/fragment_edit_product" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.azrosk.sell_it.shared.language.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/sendFeedBackFragment"
+        android:name="com.azrosk.sell_it.users.feedback.SendFeedBackFragment"
+        android:label="fragment_send_feed_back"
+        tools:layout="@layout/fragment_send_feed_back" />
 </navigation>

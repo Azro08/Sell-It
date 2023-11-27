@@ -44,7 +44,7 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
 
                     is ScreenState.Success -> {
                         if (!state.data.isNullOrEmpty()) displayOrders(state.data)
-                        else Toast.makeText(context, "No orders", Toast.LENGTH_SHORT).show()
+                        else Toast.makeText(context, getString(R.string.no_orders), Toast.LENGTH_SHORT).show()
                     }
 
                 }

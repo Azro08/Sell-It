@@ -193,7 +193,7 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
                     is ScreenState.Success -> {
                         binding.loadingGif.visibility = View.GONE
                         if (!state.data.isNullOrEmpty()) displayProducts(state.data)
-                        else handleError("No products found")
+                        else handleError(getString(R.string.no_products_found))
                     }
                 }
             }
@@ -222,7 +222,7 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
         lifecycleScope.launch {
             viewModel.addProductToFavorites(product)
             viewModel.addedToFav.collect {
-                if (it == "Done") Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT)
+                if (it == "Done") Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT)
                     .show()
                 else Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }

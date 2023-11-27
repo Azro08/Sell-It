@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.data.model.Product
 import com.azrosk.sell_it.R
@@ -44,9 +43,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                     }
 
                     is ScreenState.Success -> {
-                        Log.d("FavRespone", state.data.toString())
+                        Log.d("FavResponse", state.data.toString())
                         if (!state.data.isNullOrEmpty()) displayFavoriteList(state.data)
-                        else handleError("No products saved!")
+                        else handleError(getString(R.string.no_products_saved))
                     }
 
                 }
@@ -55,14 +54,15 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun displayFavoriteList(productListResponse: List<Product?>) {
-        Log.d("ProductsRespone", productListResponse.toString())
+        Log.d("ProductsResponse", productListResponse.toString())
         binding.textViewError.visibility = View.GONE
         binding.rvFavorites.visibility = View.VISIBLE
         productsList.clear()
         for (product in productListResponse) {
             if (product != null) productsList.add(product)
         }
-        rvAdapter = ProductsRvAdapter(productsList, { navToDetails(it.id) }, { removeFromFav(it.id) })
+        rvAdapter =
+            ProductsRvAdapter(productsList, { navToDetails(it.id) }, { removeFromFav(it.id) })
         binding.rvFavorites.layoutManager = GridLayoutManager(context, 2)
         binding.rvFavorites.setHasFixedSize(true)
         binding.rvFavorites.adapter = rvAdapter

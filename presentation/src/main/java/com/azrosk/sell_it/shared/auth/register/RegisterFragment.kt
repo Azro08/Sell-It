@@ -61,7 +61,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 if (imageUri != Uri.parse("")) uploadImage()
                 else register()
             }
-            else Toast.makeText(requireContext(), "Please fill all fields!", Toast.LENGTH_SHORT)
+            else Toast.makeText(requireContext(), getString(R.string.fill_upFields), Toast.LENGTH_SHORT)
                 .show()
         }
         binding.imageViewProfileIcon.setOnClickListener{
@@ -115,7 +115,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 viewModel.register(newUser, password)
                 viewModel.registerState.collect{
                     if (it == "Done") {
-                        Toast.makeText(requireContext(), "Registration is done!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.registration_is_done), Toast.LENGTH_SHORT).show()
                         startActivity(Intent(requireActivity(), AuthActivity::class.java))
                         requireActivity().finish()
                     } else {

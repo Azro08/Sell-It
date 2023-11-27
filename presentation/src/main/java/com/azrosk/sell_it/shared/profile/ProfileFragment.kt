@@ -42,12 +42,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (firebaseAuth.currentUser?.uid.isNullOrEmpty()) {
-            Toast.makeText(requireContext(), "You are not authorized", Toast.LENGTH_SHORT).show()
-            logout()
-        } else {
-            userId = firebaseAuth.currentUser?.uid!!
-        }
+        if (firebaseAuth.currentUser?.uid.isNullOrEmpty()) logout()
+        else userId = firebaseAuth.currentUser?.uid!!
         binding.profileImage.setOnClickListener {
             setProfileImage()
         }
@@ -87,7 +83,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     is ScreenState.Loading -> {}
                     is ScreenState.Success -> {
                         if (state.data != null) displayProfileDetails(state.data)
-                        else Toast.makeText(requireContext(), "User not found", Toast.LENGTH_SHORT)
+                        else Toast.makeText(requireContext(), getString(R.string.user_not_found), Toast.LENGTH_SHORT)
                             .show()
                     }
 
@@ -129,7 +125,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             if (areAllFieldsFilled()) {
                 if (imageUri != Uri.parse("")) uploadImage()
                 else saveUser()
-            } else Toast.makeText(requireContext(), "All fields are required", Toast.LENGTH_SHORT)
+            } else Toast.makeText(requireContext(), getString(R.string.fill_upFields), Toast.LENGTH_SHORT)
                 .show()
         }
 
@@ -166,7 +162,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         if (password.isEmpty()) password = ""
         else {
             if (binding.editTextOldPassword.text.toString().isEmpty()) {
-                Toast.makeText(requireContext(), "Old password is required", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), getString(R.string.old_password_is_required), Toast.LENGTH_SHORT)
                     .show()
             } else {
                 oldPassword = binding.editTextOldPassword.text.toString()
@@ -199,7 +195,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 when (state) {
                     is ScreenState.Loading -> {}
                     is ScreenState.Success -> {
-                        Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT)
+                        Toast.makeText(requireContext(), getString(R.string.profile_updated), Toast.LENGTH_SHORT)
                             .show()
                         binding.saveLoadingGif.visibility = View.GONE
                         binding.buttonSaveProfile.visibility = View.GONE
