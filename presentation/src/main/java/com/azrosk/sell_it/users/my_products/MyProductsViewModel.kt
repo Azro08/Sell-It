@@ -5,9 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.azrosk.data.model.Category
 import com.azrosk.data.model.Product
 import com.azrosk.data.model.Users
-import com.azrosk.data.repository.FavoritesRepository
 import com.azrosk.data.repository.ProductsRepository
-import com.azrosk.data.repository.UsersRepository
 import com.azrosk.sell_it.util.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,34 +14,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyProductsViewModel @Inject constructor(
-    private val productsRepository: ProductsRepository,
-    private val favoritesRepository: FavoritesRepository,
-    private val usersRepository: UsersRepository
+    private val productsRepository: ProductsRepository
 ) : ViewModel() {
 
     private val _productsList = MutableStateFlow<ScreenState<List<Product>?>>(ScreenState.Loading())
     val productsList = _productsList
 
-    private val _categoryList = MutableStateFlow<ScreenState<List<Category>?>>(ScreenState.Loading())
+    private val _categoryList =
+        MutableStateFlow<ScreenState<List<Category>?>>(ScreenState.Loading())
     val categoryList = _categoryList
 
-    private val _addedToFav = MutableStateFlow("")
-    val addedToFav = _addedToFav
+    private val _deleted = MutableStateFlow("")
+    val deleted = _deleted
 
     private val _user = MutableStateFlow<Users?>(null)
     val user = _user
-
-    fun getUser(userId : String) = viewModelScope.launch {
-        usersRepository.getUser(userId).let {
-            if (it != null) _user.value = it
-        }
-    }
 
     init {
         getCategories()
     }
 
-    fun refresh(category: String){
+    fun refresh(category: String) {
         getMyProducts(category)
     }
 
@@ -59,16 +50,16 @@ class MyProductsViewModel @Inject constructor(
         }
     }
 
+    suspend fun deleteProduct(productId: String) {
+        productsRepository.deleteProduct(productId).let {
+            _deleted.value = it
+        }
+    }
+
     private fun getCategories() = viewModelScope.launch {
         productsRepository.getCategoryList().let {
             if (!it.isNullOrEmpty()) _categoryList.value = ScreenState.Success(it)
             else _categoryList.value = ScreenState.Error("No categories found")
-        }
-    }
-
-    fun addProductToFavorites(product: Product) = viewModelScope.launch {
-        favoritesRepository.saveProductToFavorites(product).let {
-            _addedToFav.value = it
         }
     }
 

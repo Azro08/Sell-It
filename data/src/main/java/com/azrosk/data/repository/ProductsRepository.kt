@@ -66,14 +66,29 @@ class ProductsRepository @Inject constructor(
     }
 
     // Function to update a product
-    suspend fun updateProduct(productId: String, updatedProduct: Map<String, Any>) {
-        try {
+    suspend fun updateProduct(productId: String, updatedProduct: Map<String, Any>) : String{
+        return try {
             productsCollection
                 .document(productId)
                 .update(updatedProduct)
                 .await()
+            "Done"
         } catch (e: Exception) {
             // Handle exceptions
+            e.message.toString()
+        }
+    }
+
+    suspend fun editProduct(productId: String, updatedProduct: Product) : String{
+        return try {
+            productsCollection
+                .document(productId)
+                .set(updatedProduct)
+                .await()
+            "Done"
+        } catch (e: Exception) {
+            // Handle exceptions
+            e.message.toString()
         }
     }
 
@@ -117,14 +132,16 @@ class ProductsRepository @Inject constructor(
 
     }
 
-    suspend fun deleteProduct(productId: String) {
-        try {
+    suspend fun deleteProduct(productId: String)  : String{
+        return try {
             firestore.collection("products")
                 .document(productId)
                 .delete()
                 .await()
+            "Done"
         } catch (e: Exception) {
             // Handle exceptions
+            e.message.toString()
         }
     }
 

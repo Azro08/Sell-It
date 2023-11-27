@@ -43,8 +43,6 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         getCategories()
         binding.buttonSave.setOnClickListener {
-            binding.buttonSave.visibility = View.GONE
-            binding.loadingDetailsGif.visibility = View.VISIBLE
             if (areAllFieldsFilled()) {
                 if (imagesList.isEmpty()) saveProduct()
                 else uploadImage()
@@ -153,6 +151,8 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
     }
 
     private fun saveProduct() {
+        binding.buttonSave.visibility = View.GONE
+        binding.loadingDetailsGif.visibility = View.VISIBLE
         val productName = binding.editTextProductName.text.toString()
         val description = binding.editTextDes.text.toString()
         val price = binding.editTextPrice.text.toString().toDouble()
