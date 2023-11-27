@@ -7,7 +7,7 @@ import com.azrosk.data.model.Product
 import com.azrosk.data.model.Users
 import com.azrosk.data.repository.FavoritesRepository
 import com.azrosk.data.repository.ProductsRepository
-import com.azrosk.data.repository.UsersRepository
+import com.azrosk.data.repository.UsersRepositoryImpl
 import com.azrosk.sell_it.util.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ProductsListViewModel @Inject constructor(
     private val productsRepository: ProductsRepository,
     private val favoritesRepository: FavoritesRepository,
-    private val usersRepository: UsersRepository
+    private val usersRepositoryImpl: UsersRepositoryImpl
 ) : ViewModel() {
 
     private val _productsList = MutableStateFlow<ScreenState<List<Product>?>>(ScreenState.Loading())
@@ -34,7 +34,7 @@ class ProductsListViewModel @Inject constructor(
     val user = _user
 
     fun getUser(userId : String) = viewModelScope.launch {
-        usersRepository.getUser(userId).let {
+        usersRepositoryImpl.getUser(userId).let {
             if (it != null) _user.value = it
         }
     }
@@ -76,7 +76,7 @@ class ProductsListViewModel @Inject constructor(
 
         productsRepository.getOtherUsersProducts(category).let {
             if (it.isNotEmpty()) _productsList.value = ScreenState.Success(it)
-            else _productsList.value = ScreenState.Error("No products found")
+            else _productsList.value = ScreenState.Error("Продукты не найдены")
         }
 
     }

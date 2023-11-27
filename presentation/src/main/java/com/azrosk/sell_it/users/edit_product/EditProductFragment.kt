@@ -137,7 +137,7 @@ class EditProductFragment : Fragment(R.layout.fragment_edit_product) {
             viewModel.editProduct(productId, updatedProduct)
             viewModel.editProduct.collect {
                 if (it == "Done") {
-                    Toast.makeText(requireContext(), "Uploaded", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.uploaded), Toast.LENGTH_SHORT)
                         .show()
                     findNavController().popBackStack()
                 } else {

@@ -35,7 +35,7 @@ class OrderProductFragment : Fragment(R.layout.fragment_order_product) {
         getProductDetails(productId)
         binding.buttonSubmitOrder.setOnClickListener {
             if (allFieldsAreFilled()) submitOrder()
-            else  Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            else  Toast.makeText(context, getString(R.string.fill_upFields), Toast.LENGTH_SHORT).show()
         }
     }
 

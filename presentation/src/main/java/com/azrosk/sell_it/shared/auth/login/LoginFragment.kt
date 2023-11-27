@@ -26,7 +26,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.buttonLogin.setOnClickListener {
             if (allFieldsAreFilled()) login()
-            else Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+            else Toast.makeText(requireContext(), getString(R.string.fill_upFields), Toast.LENGTH_SHORT)
                 .show()
         }
 

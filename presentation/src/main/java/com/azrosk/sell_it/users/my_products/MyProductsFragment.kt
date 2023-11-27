@@ -112,7 +112,7 @@ class MyProductsFragment : Fragment(R.layout.fragment_my_products) {
                     is ScreenState.Success -> {
                         binding.loadingGif.visibility = View.GONE
                         if (!state.data.isNullOrEmpty()) displayProducts(state.data)
-                        else handleError("No products found")
+                        else handleError(getString(R.string.no_products_found))
                     }
                 }
             }
@@ -143,7 +143,7 @@ class MyProductsFragment : Fragment(R.layout.fragment_my_products) {
             viewModel.deleteProduct(product.id)
             viewModel.deleted.collect {
                 if (it == "Done") {
-                    Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.deleted), Toast.LENGTH_SHORT)
                         .show()
                     viewModel.refresh(category)
                 } else Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()

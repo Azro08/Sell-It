@@ -1,5 +1,7 @@
 package com.azrosk.sell_it.users
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.sell_it.R
 import com.azrosk.sell_it.databinding.ActivityMainBinding
+import com.azrosk.sell_it.util.Constants
+import com.azrosk.sell_it.util.setLocale
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,7 +21,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val binding by viewBinding(ActivityMainBinding::bind)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
         supportActionBar?.hide()
         binding.bottomNavView.background = null
         binding.bottomNavView.menu.getItem(2).isEnabled = false
@@ -25,6 +28,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         binding.fab.setOnClickListener {
             findNavController(R.id.nav_host).navigate(R.id.addProductFragment)
         }
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val lang = newBase?.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            ?.getString(Constants.LANGUAGE_KEY, "en")!!.toString()
+        super.attachBaseContext(ContextWrapper(newBase.setLocale(lang)))
     }
 
     private fun setBottomNavBar() {
@@ -51,11 +60,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             if (destination.id in topLevelDestinations) {
                 binding.bottomNavView.visibility = View.VISIBLE
                 binding.fab.visibility = View.VISIBLE
-                binding.bottomAppBar.visibility  = View.VISIBLE
+                binding.bottomAppBar.visibility = View.VISIBLE
             } else {
                 binding.bottomNavView.visibility = View.GONE
                 binding.fab.visibility = View.GONE
-                binding.bottomAppBar.visibility  = View.GONE
+                binding.bottomAppBar.visibility = View.GONE
             }
         }
 

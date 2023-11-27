@@ -3,18 +3,22 @@ package com.azrosk.data.repository
 import android.net.Uri
 import android.util.Log
 import com.azrosk.data.model.Users
+import com.azrosk.domain.repository.UsersRepository
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.util.UUID
 import javax.inject.Inject
 
-class UsersRepository @Inject constructor(
-    firestore: FirebaseFirestore,
+class UsersRepositoryImpl @Inject constructor(
+    private val firestore: FirebaseFirestore,
     private val firebaseAuth: FirebaseAuth,
-    private val storage: FirebaseStorage
-) {
+    private val storage: FirebaseStorage,
+) : UsersRepository {
 
     private val usersCollection = firestore.collection("users")
     suspend fun getUsers(): List<Users> {
@@ -34,6 +38,28 @@ class UsersRepository @Inject constructor(
         }
     }
 
+    override suspend fun deleteUsersProducts(uid: String) {
+        val firestore = FirebaseFirestore.getInstance()
+        val productsCollection = firestore.collection("products")
+
+        val query = productsCollection.whereEqualTo("userId", uid)
+
+        val querySnapshot: QuerySnapshot = query.get().await()
+
+        val deletionTasks: MutableList<Task<Void>> = mutableListOf()
+        for (document in querySnapshot.documents) {
+            val deletionTask = productsCollection.document(document.id).delete()
+            deletionTasks.add(deletionTask)
+        }
+
+        try {
+            Tasks.await(Tasks.whenAll(deletionTasks))
+        } catch (e: Exception) {
+            Log.d("UsersRep", e.message.toString())
+        }
+    }
+
+
     suspend fun getUser(userId: String): Users? {
         val userDocument = usersCollection.document(userId)
         val documentSnapshot = userDocument.get().await()
@@ -44,7 +70,7 @@ class UsersRepository @Inject constructor(
         }
     }
 
-    suspend fun deleteUser(userId: String): String {
+    override suspend fun deleteUser(userId: String): String {
         val userDocument = usersCollection.document(userId)
         return try {
             userDocument.delete().await()

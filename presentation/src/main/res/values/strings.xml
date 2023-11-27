@@ -25,8 +25,8 @@
     <string name="add_image">Add Image</string>
     <string name="save">Save</string>
     <string name="search">Search</string>
-    <string name="write_a_review">Write a review...</string>
-    <string name="write_feedback">Write feedback...</string>
+    <string name="write_a_review">Write a review…</string>
+    <string name="write_feedback">Write feedback…</string>
     <string name="order">Order</string>
     <string name="reviews">Reviews</string>
     <string name="order_details">Order details</string>
@@ -55,4 +55,25 @@
     <string name="edit">Edit</string>
     <string name="new_password">New password</string>
     <string name="old_password">Old password</string>
+    <string name="language">Language</string>
+    <string name="feedback">Feedback</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="send">Send</string>
+
+    <string name="fill_upFields">Please fill all fields</string>
+    <string name="registration_is_done">"Registration is done!"</string>
+    <string name="old_password_is_required">Old password is required</string>
+    <string name="profile_updated">Profile updated</string>
+    <string name="user_not_found">User not found</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="no_products_saved">No products saved!</string>
+    <string name="sent">Sent</string>
+    <string name="no_products_found">No products found</string>
+    <string name="deleted">Deleted</string>
+    <string name="no_orders">No orders</string>
+    <string name="review_sent">Review sent</string>
+    <string name="saved">Saved</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
 </resources>

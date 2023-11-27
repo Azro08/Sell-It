@@ -71,7 +71,13 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteAccount(uid: String) = api.deleteUser(uid)
+    override suspend fun deleteAccount(uid: String) : String{
+        return try {
+            api.deleteUser(uid)
+        } catch (e : Exception){
+            e.message.toString()
+        }
+    }
 
     override suspend fun getUserRole(): String? {
         val uid = firebaseAuth.currentUser?.uid

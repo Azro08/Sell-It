@@ -22,8 +22,8 @@ class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
         binding.classroomViewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.classroomViewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Login"
-                1 -> "Signup"
+                0 -> getString(R.string.login)
+                1 -> getString(R.string.register)
                 else -> ""
             }
         }.attach()

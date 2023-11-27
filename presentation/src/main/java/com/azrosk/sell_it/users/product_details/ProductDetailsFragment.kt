@@ -74,7 +74,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
                         binding.buttonSendFeedback.visibility = View.VISIBLE
                         binding.sendLoadingGif.visibility = View.GONE
                         if (state.data == "Done") {
-                            Toast.makeText(context, "Отзыв отправлен", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.review_sent), Toast.LENGTH_SHORT).show()
                         }
 
                     }

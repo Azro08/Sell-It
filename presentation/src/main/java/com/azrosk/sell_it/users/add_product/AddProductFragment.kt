@@ -46,7 +46,7 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
             if (areAllFieldsFilled()) {
                 if (imagesList.isEmpty()) saveProduct()
                 else uploadImage()
-            } else Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+            } else Toast.makeText(requireContext(), getString(R.string.fill_upFields), Toast.LENGTH_SHORT)
                 .show()
         }
         if (imagesList.size > 5) binding.buttonAddImage.visibility = View.GONE
@@ -175,7 +175,7 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
             viewModel.addProduct(newProduct)
             viewModel.productAdded.collect {
                 if (it == "Done") {
-                    Toast.makeText(requireContext(), "Uploaded", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.uploaded), Toast.LENGTH_SHORT)
                         .show()
                     findNavController().popBackStack()
                 } else {

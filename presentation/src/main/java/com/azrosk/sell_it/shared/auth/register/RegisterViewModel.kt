@@ -3,7 +3,7 @@ package com.azrosk.sell_it.shared.auth.register
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.azrosk.data.repository.UsersRepository
+import com.azrosk.data.repository.UsersRepositoryImpl
 import com.azrosk.domain.model.User
 import com.azrosk.domain.usecase.RegisterUseCase
 import com.azrosk.sell_it.util.ScreenState
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
-    private val usersRepository: UsersRepository
+    private val usersRepositoryImpl: UsersRepositoryImpl
 ) : ViewModel() {
 
     private val _imageUploaded = MutableStateFlow<ScreenState<Uri?>>(ScreenState.Loading())
@@ -26,7 +26,7 @@ class RegisterViewModel @Inject constructor(
 
     fun uploadImageAndGetUri(userId: String, imageUri: Uri) = viewModelScope.launch {
         try {
-            usersRepository.uploadImageAndGetUri(userId, imageUri).let {
+            usersRepositoryImpl.uploadImageAndGetUri(userId, imageUri).let {
                 if (it != null) _imageUploaded.value = ScreenState.Success(it)
                 else _imageUploaded.value = ScreenState.Error("Error Loading image")
             }
