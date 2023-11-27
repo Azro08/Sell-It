@@ -52,4 +52,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="my_products">My Products</string>
+    <string name="edit">Edit</string>
+    <string name="new_password">New password</string>
+    <string name="old_password">Old password</string>
 </resources>
