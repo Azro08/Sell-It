@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="150dp"
+    android:layout_margin="15dp"
+    android:padding="6dp"
+    android:background="@drawable/rounded_edges_background"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageViewProductImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:importantForAccessibility="no"
+        tools:background="@drawable/image_container_background"/>
+
+    <TextView
+        android:id="@+id/textViewProductName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:text = "Test"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewProductPrice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:textSize="14sp"
+            tools:text = "20 руб"/>
+
+        <ImageButton
+            android:id="@+id/buttonDeleteMyProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/delete_icon"/>
+
+    </LinearLayout>
+
+</LinearLayout>

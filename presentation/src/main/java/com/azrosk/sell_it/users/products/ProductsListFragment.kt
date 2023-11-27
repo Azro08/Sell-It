@@ -79,6 +79,7 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
             when (it.itemId) {
                 R.id.notificationsFragment -> findNavController().navigate(R.id.notificationsFragment)
                 R.id.chatsListFragment -> findNavController().navigate(R.id.chatsListFragment)
+                R.id.myProductsFragment -> findNavController().navigate(R.id.myProductsFragment)
                 R.id.itemLogout -> logout()
             }
 

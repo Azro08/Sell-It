@@ -71,4 +71,18 @@
         android:name="com.azrosk.sell_it.users.chat.ChatsListFragment"
         android:label="fragment_chats_list"
         tools:layout="@layout/fragment_chats_list" />
+    <fragment
+        android:id="@+id/myProductsFragment"
+        android:name="com.azrosk.sell_it.users.my_products.MyProductsFragment"
+        android:label="fragment_my_products"
+        tools:layout="@layout/fragment_my_products" >
+        <action
+            android:id="@+id/nav_my_prod_edit"
+            app:destination="@id/editProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.azrosk.sell_it.users.edit_product.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" />
 </navigation>

@@ -35,6 +35,20 @@ class ProductsRepository @Inject constructor(
         }
     }
 
+    suspend fun getMyProducts(category: String) : List<Product>{
+        val userId = firebaseAuth.currentUser?.uid ?: ""
+        return try {
+            val querySnapshot = productsCollection
+                .whereEqualTo("userId", userId)
+                .whereEqualTo("category", category)
+                .get().await()
+            querySnapshot.toObjects(Product::class.java)
+        } catch (e: Exception) {
+            // Handle exceptions
+            emptyList()
+        }
+    }
+
     // Function to get products for a specific user
     suspend fun getOtherUsersProducts(category : String): List<Product> {
         val userId = firebaseAuth.currentUser?.uid ?: ""

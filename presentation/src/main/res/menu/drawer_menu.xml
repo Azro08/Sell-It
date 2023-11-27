@@ -15,6 +15,11 @@
             android:title="@string/chat"
             android:icon="@drawable/chat_icon"/>
 
+        <item
+            android:id="@+id/myProductsFragment"
+            android:title="@string/my_products"
+            android:icon="@drawable/my_product_icon"/>
+
     </group>
 
     <item
