@@ -1,6 +1,5 @@
 package com.azrosk.sell_it.users.my_products
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,7 +19,6 @@ import com.azrosk.data.model.Category
 import com.azrosk.data.model.Product
 import com.azrosk.sell_it.R
 import com.azrosk.sell_it.databinding.FragmentMyProductsBinding
-import com.azrosk.sell_it.shared.auth.AuthActivity
 import com.azrosk.sell_it.users.products.CategoryRvAdapter
 import com.azrosk.sell_it.util.AuthManager
 import com.azrosk.sell_it.util.Constants
@@ -53,13 +51,6 @@ class MyProductsFragment : Fragment(R.layout.fragment_my_products) {
             binding.swipeRefreshLayout.isRefreshing = false
         }
         search()
-    }
-
-    private fun logout() {
-        firebaseAuth.signOut()
-        authManager.removeUser()
-        startActivity(Intent(requireActivity(), AuthActivity::class.java))
-        requireActivity().finish()
     }
 
     private fun search() {
@@ -149,11 +140,13 @@ class MyProductsFragment : Fragment(R.layout.fragment_my_products) {
 
     private fun deleteProduct(product: Product) {
         lifecycleScope.launch {
-            viewModel.addProductToFavorites(product)
-            viewModel.addedToFav.collect {
-                if (it == "Done") Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT)
-                    .show()
-                else Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            viewModel.deleteProduct(product.id)
+            viewModel.deleted.collect {
+                if (it == "Done") {
+                    Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT)
+                        .show()
+                    viewModel.refresh(category)
+                } else Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }
