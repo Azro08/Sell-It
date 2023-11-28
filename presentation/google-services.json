@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "638737588138",
+    "project_id": "sell-it-a3a71",
+    "storage_bucket": "sell-it-a3a71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638737588138:android:a58c8a9e63b497318495d3",
+        "android_client_info": {
+          "package_name": "com.azrosk.sell_it"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZyj63MD4_E-k3V006ngtXvYjDpRSqm5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/notificationsFragment"
+            android:title="@string/notifications"
+            android:icon="@drawable/notifications_icon"/>
+
+        <item
+            android:id="@+id/chatsListFragment"
+            android:title="@string/chat"
+            android:icon="@drawable/chat_icon"/>
+
+        <item
+            android:id="@+id/myProductsFragment"
+            android:title="@string/my_products"
+            android:icon="@drawable/my_product_icon"/>
+
+    </group>
+
+    <item
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/itemLogout"
+                android:title="@string/logout"
+                android:icon="@drawable/logout_icon"/>
+
+        </menu>
+
+    </item>
+
+</menu>

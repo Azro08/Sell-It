@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/users_nav_graph"
+    app:startDestination="@id/productsListFragment">
+
+    <fragment
+        android:id="@+id/productsListFragment"
+        android:name="com.azrosk.sell_it.users.products.ProductsListFragment"
+        android:label="fragment_products_list"
+        tools:layout="@layout/fragment_products_list" >
+        <action
+            android:id="@+id/nav_list_to_prod_details"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.azrosk.sell_it.users.favorite.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/nav_fav_details"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.azrosk.sell_it.users.add_product.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.azrosk.sell_it.shared.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.azrosk.sell_it.users.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/nav_settings_lang"
+            app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/nav_settings_send_feedback"
+            app:destination="@id/sendFeedBackFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.azrosk.sell_it.users.product_details.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
+        <action
+            android:id="@+id/nav_details_order"
+            app:destination="@id/orderProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderProductFragment"
+        android:name="com.azrosk.sell_it.users.order_product.OrderProductFragment"
+        android:label="fragment_order_product"
+        tools:layout="@layout/fragment_order_product" />
+    <dialog
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.azrosk.sell_it.users.notification.OrderDetailsFragment"
+        android:label="fragment_order_details"
+        tools:layout="@layout/fragment_order_details" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.azrosk.sell_it.users.notification.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/nav_notification_order_details"
+            app:destination="@id/orderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatsListFragment"
+        android:name="com.azrosk.sell_it.users.chat.chat_list.ChatsListFragment"
+        android:label="fragment_chats_list"
+        tools:layout="@layout/fragment_chats_list" >
+        <action
+            android:id="@+id/nav_chat_list_to_chat"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myProductsFragment"
+        android:name="com.azrosk.sell_it.users.my_products.MyProductsFragment"
+        android:label="fragment_my_products"
+        tools:layout="@layout/fragment_my_products" >
+        <action
+            android:id="@+id/nav_my_prod_edit"
+            app:destination="@id/editProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.azrosk.sell_it.users.edit_product.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.azrosk.sell_it.shared.language.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/sendFeedBackFragment"
+        android:name="com.azrosk.sell_it.users.feedback.SendFeedBackFragment"
+        android:label="fragment_send_feed_back"
+        tools:layout="@layout/fragment_send_feed_back" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.azrosk.sell_it.users.chat.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+</navigation>
