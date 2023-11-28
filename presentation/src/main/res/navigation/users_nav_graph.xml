@@ -75,9 +75,13 @@
     </fragment>
     <fragment
         android:id="@+id/chatsListFragment"
-        android:name="com.azrosk.sell_it.users.chat.ChatsListFragment"
+        android:name="com.azrosk.sell_it.users.chat.chat_list.ChatsListFragment"
         android:label="fragment_chats_list"
-        tools:layout="@layout/fragment_chats_list" />
+        tools:layout="@layout/fragment_chats_list" >
+        <action
+            android:id="@+id/nav_chat_list_to_chat"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myProductsFragment"
         android:name="com.azrosk.sell_it.users.my_products.MyProductsFragment"
@@ -102,4 +106,9 @@
         android:name="com.azrosk.sell_it.users.feedback.SendFeedBackFragment"
         android:label="fragment_send_feed_back"
         tools:layout="@layout/fragment_send_feed_back" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.azrosk.sell_it.users.chat.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

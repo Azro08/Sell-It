@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".users.chat.chat.ChatFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink"
+        android:padding="6dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/chatProfileImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/turquoise_profile_icon"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/textViewProfileName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text ="Anas"
+            android:layout_marginStart="4dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/msgLl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <EditText
+            android:id="@+id/etSendMsg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/msg_bgnd"
+            android:hint="@string/message"
+            android:padding="7dp" />
+
+        <Button
+            android:id="@+id/btnSendMsg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="3dp"
+            android:background="@drawable/send_icon" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

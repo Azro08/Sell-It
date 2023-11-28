@@ -3,13 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".users.chat.ChatsListFragment"
-    android:background="@color/white">
+    tools:context=".users.chat.chat_list.ChatsListFragment"
+    android:background="@color/light_gray">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="24sp"
+        android:fontFamily="cursive"
+        android:text="@string/no_chat"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:fontFamily="cursive"
+        android:text="@string/chat"/>
+
+   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="40dp"
+       android:id="@+id/swipeRefreshLayout">
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rvChatList"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" />
+
+   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

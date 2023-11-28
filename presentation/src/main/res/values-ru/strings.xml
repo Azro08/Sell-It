@@ -71,5 +71,7 @@
     <string name="saved">Сохранено</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="no_chat">Нету чата</string>
+    <string name="message">сообщение</string>
 
 </resources>
