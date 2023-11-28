@@ -23,9 +23,9 @@ class ChatViewModel @Inject constructor(
         chatRepository.sendMessage(receiverUid, senderUid, msgObject)
     }
 
-    fun getMsgList(senderRoomId: String) = viewModelScope.launch {
+    fun getMsgList(senderRoom: String, receiverRoom: String) = viewModelScope.launch {
         try {
-            chatRepository.displayMsg(senderRoomId).let {
+            chatRepository.displayMsg(senderRoom, receiverRoom).let {
                 Log.d("viemodel", it.toString())
                 if (it.isNotEmpty()) _msgList.value = ScreenState.Success(it)
                 else _msgList.value = ScreenState.Error("No messages")

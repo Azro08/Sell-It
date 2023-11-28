@@ -35,6 +35,10 @@ object Constants {
         return randomString.toString()
     }
 
+    fun getCurrentTimestamp(): Long {
+        return System.currentTimeMillis() / 1000 // Get current timestamp in seconds
+    }
+
     fun getCurrentDate(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(Date())

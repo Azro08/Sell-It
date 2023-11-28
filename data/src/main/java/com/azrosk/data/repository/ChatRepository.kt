@@ -1,6 +1,8 @@
 package com.azrosk.data.repository
 
+import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import com.azrosk.data.model.MessageItem
 import com.azrosk.data.model.Users
 import com.google.firebase.auth.FirebaseAuth
@@ -48,40 +50,72 @@ class ChatRepository @Inject constructor(
 
         database.child("chats").child("senderRoom").child(senderRoom).child("messages").push()
             .setValue(msgObject).addOnSuccessListener {
-                database.child("chats").child("receiverRoom").child(receiverRoom).child("messages")
-                    .push().setValue(msgObject)
+                database.child("chats").child("receiverRoom").child(receiverRoom).child("messages").push().setValue(msgObject)
             }.await()
     }
 
-    suspend fun displayMsg(senderRoom: String): List<MessageItem> {
+    suspend fun displayMsg(senderRoom: String, receiverRoom: String): List<MessageItem> {
         return suspendCancellableCoroutine { continuation ->
             val messageList = mutableListOf<MessageItem>()
+            var senderFinished = false
+            var receiverFinished = false
 
-            val eventListener = object : ValueEventListener {
+            val senderEventListener = object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     messageList.clear()
                     for (postSnapshot in snapshot.children) {
                         val msg = postSnapshot.getValue(MessageItem::class.java)
-                        msg?.let { messageList.add(it) }
+                        msg?.let {
+                            messageList.add(it)
+                        }
                     }
-                    continuation.resume(messageList.toList()) // Resume with fetched list
+                    senderFinished = true
+                    if (receiverFinished) {
+                        val sortedList = messageList.sortedBy { it.timestamp }
+                        continuation.resume(sortedList.toList()) // Resume with fetched list
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    continuation.resumeWithException(error.toException()) // Resume with error
+                    if (!receiverFinished) {
+                        continuation.resumeWithException(error.toException()) // Resume with error
+                    }
                 }
             }
 
-            // Add ValueEventListener to fetch data
-            val databaseRef =
-                database.child("chats").child("senderRoom").child(senderRoom).child("messages")
-            databaseRef.addListenerForSingleValueEvent(eventListener)
+            val receiverEventListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (postSnapshot in snapshot.children) {
+                        val msg = postSnapshot.getValue(MessageItem::class.java)
+                        msg?.let {
+                            messageList.add(it)
+                        }
+                    }
+                    receiverFinished = true
+                    if (senderFinished) {
+                        val sortedList = messageList.sortedBy { it.timestamp }
+                        continuation.resume(sortedList.toList()) // Resume with fetched list
+                    }
+                }
 
-            // Remove the listener when coroutine is cancelled
+                override fun onCancelled(error: DatabaseError) {
+                    if (!senderFinished) {
+                        continuation.resumeWithException(error.toException()) // Resume with error
+                    }
+                }
+            }
+
+
+            val senderDatabaseRef = database.child("chats").child("senderRoom").child(senderRoom).child("messages")
+            val receiverDatabaseRef = database.child("chats").child("senderRoom").child(receiverRoom).child("messages")
+
+            senderDatabaseRef.addListenerForSingleValueEvent(senderEventListener)
+            receiverDatabaseRef.addListenerForSingleValueEvent(receiverEventListener)
+
             continuation.invokeOnCancellation {
-                databaseRef.removeEventListener(eventListener)
+                senderDatabaseRef.removeEventListener(senderEventListener)
+                receiverDatabaseRef.removeEventListener(receiverEventListener)
             }
         }
     }
-
 }

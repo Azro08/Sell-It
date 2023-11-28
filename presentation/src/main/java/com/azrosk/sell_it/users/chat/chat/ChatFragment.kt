@@ -12,6 +12,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.data.model.MessageItem
 import com.azrosk.sell_it.R
 import com.azrosk.sell_it.databinding.FragmentChatBinding
+import com.azrosk.sell_it.util.Constants
 import com.azrosk.sell_it.util.ScreenState
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -46,6 +47,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
     private fun setRecyclerView(messageList: List<MessageItem>) {
         Log.d("MsgList", messageList.size.toString())
+        messageList.sortedBy { it.timestamp }
         msgAdapter = MessageAdapter(messageList)
         binding.rvChat.layoutManager = LinearLayoutManager(requireContext())
         binding.rvChat.scrollToPosition(messageList.size - 1)
@@ -56,10 +58,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     private fun setChatDetails(receiverUid: String, senderUid: String) {
         val senderRoom = receiverUid + senderUid
         val receiverRoom = senderUid + receiverUid
-        displayMsg(senderRoom)
+        displayMsg(senderRoom, receiverRoom)
         binding.btnSendMsg.setOnClickListener {
             sendMsg(senderUid, receiverUid)
-            displayMsg(senderRoom)
+            displayMsg(senderRoom, receiverRoom)
             binding.etSendMsg.setText("")
 
         }
@@ -67,15 +69,15 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
     private fun sendMsg(senderUid: String, receiverUid: String) {
         val message = binding.etSendMsg.text.toString()
-        val msgObject = MessageItem(message, senderUid)
+        val msgObject = MessageItem(message, senderUid, Constants.getCurrentTimestamp())
         lifecycleScope.launch {
             viewModel.sendMessage(receiverUid, senderUid, msgObject)
         }
     }
 
-    private fun displayMsg(senderRoom: String) {
+    private fun displayMsg(senderRoom: String, receiverUid: String) {
         lifecycleScope.launch {
-            viewModel.getMsgList(senderRoom)
+            viewModel.getMsgList(senderRoom, receiverUid)
             viewModel.msgList.collect { state ->
 
                 when (state) {
@@ -85,6 +87,8 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                     is ScreenState.Success -> {
                         if (!state.data.isNullOrEmpty()) setRecyclerView(state.data)
                     }
+
+                    else -> {}
                 }
 
             }

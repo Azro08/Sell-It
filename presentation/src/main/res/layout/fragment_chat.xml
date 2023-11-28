@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,25 +9,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@color/pink"
         android:padding="6dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/chatProfileImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="3dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
             android:background="@drawable/turquoise_profile_icon"
             android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/textViewProfileName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:textSize="18sp"
             tools:text ="Anas"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="4dp"/>
 
     </LinearLayout>

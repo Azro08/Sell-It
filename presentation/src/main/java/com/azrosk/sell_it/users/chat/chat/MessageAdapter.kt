@@ -1,5 +1,6 @@
 package com.azrosk.sell_it.users.chat.chat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +25,9 @@ class MessageAdapter(private val messageItemList: List<MessageItem>) : RecyclerV
 
     override fun getItemViewType(position: Int): Int {
         val curMessage = messageItemList[position]
-
-        return if (FirebaseAuth.getInstance().currentUser?.uid.equals(curMessage.senderId)){
+        val currentUid = FirebaseAuth.getInstance().currentUser?.uid
+        Log.d("MsgAdapter", "curMsg: $curMessage      uid : $currentUid")
+        return if (currentUid.equals(curMessage.senderId)){
             itemSent
         } else{
             itemRec
