@@ -16,6 +16,9 @@ object Constants {
     const val USER_ID = "user_id"
     const val EMAIL = "email"
     const val LANGUAGE_KEY = "language_key"
+    const val CHAT_NAME = "chat_name"
+    const val CHAT_UID = "chat_uid"
+    const val CHAT_IMAGE = "chat_image"
 
     fun generateRandomId(): String {
         val characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -30,6 +33,10 @@ object Constants {
         }
 
         return randomString.toString()
+    }
+
+    fun getCurrentTimestamp(): Long {
+        return System.currentTimeMillis() / 1000 // Get current timestamp in seconds
     }
 
     fun getCurrentDate(): String {

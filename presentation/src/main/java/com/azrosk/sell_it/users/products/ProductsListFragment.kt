@@ -74,6 +74,10 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        binding.buttonNavDrawer.setOnClickListener {
+            binding.drawerLayout.open()
+        }
+
         binding.navViewDrawer.setNavigationItemSelectedListener {
 
             when (it.itemId) {
