@@ -131,7 +131,10 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
             viewModel.imageUploaded.collect { state ->
                 Log.d("ImagesSiz", imagesList.size.toString())
                 when (state) {
-                    is ScreenState.Loading -> {}
+                    is ScreenState.Loading -> {
+                        binding.buttonSave.visibility = View.GONE
+                        binding.loadingDetailsGif.visibility = View.VISIBLE
+                    }
                     is ScreenState.Success -> {
                         Log.d("ImageUri", state.data.toString())
                         imageUrls.addAll(state.data!!)
@@ -151,8 +154,6 @@ class AddProductFragment : Fragment(R.layout.fragment_add_product) {
     }
 
     private fun saveProduct() {
-        binding.buttonSave.visibility = View.GONE
-        binding.loadingDetailsGif.visibility = View.VISIBLE
         val productName = binding.editTextProductName.text.toString()
         val description = binding.editTextDes.text.toString()
         val price = binding.editTextPrice.text.toString().toDouble()

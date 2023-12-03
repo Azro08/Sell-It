@@ -2,6 +2,7 @@ package com.azrosk.sell_it.shared.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azrosk.sell_it.util.AuthManager
 import com.azrosk.sell_it.users.MainActivity
 import com.azrosk.sell_it.R
+import com.azrosk.sell_it.admin.AdminActivity
 import com.azrosk.sell_it.databinding.FragmentLoginBinding
 import com.azrosk.sell_it.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,9 +44,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 if (result == Constants.ADMIN || result == Constants.USER) {
                     authManager.saveUer(email)
                     authManager.saveRole(result)
-                    navToMainActivity()
+                    navToRoleActivity(result)
                 }
                 else {
+                    Log.d("loginErr", result)
                     if (result != "") Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show()
                     binding.buttonLogin.isClickable = true
                 }
@@ -52,9 +55,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    private fun navToMainActivity() {
-        startActivity(Intent(requireActivity(), MainActivity::class.java))
-        requireActivity().finish()
+    private fun navToRoleActivity(role: String) {
+        when(role){
+            Constants.ADMIN -> {
+                startActivity(Intent(requireActivity(), AdminActivity::class.java))
+                requireActivity().finish()
+            }
+            Constants.USER ->{
+                startActivity(Intent(requireActivity(), MainActivity::class.java))
+                requireActivity().finish()
+            }
+        }
     }
 
     private fun allFieldsAreFilled(): Boolean {

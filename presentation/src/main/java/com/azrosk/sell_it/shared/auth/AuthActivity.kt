@@ -19,8 +19,8 @@ class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
     private fun setViewPager() {
 
         val adapter = AuthViewPagerAdapter(this)
-        binding.classroomViewPager.adapter = adapter
-        TabLayoutMediator(binding.tabLayout, binding.classroomViewPager) { tab, position ->
+        binding.authViewPager.adapter = adapter
+        TabLayoutMediator(binding.tabLayout, binding.authViewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> getString(R.string.login)
                 1 -> getString(R.string.register)

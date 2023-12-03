@@ -35,13 +35,19 @@ class ProductsRepository @Inject constructor(
         }
     }
 
-    suspend fun getMyProducts(category: String) : List<Product>{
+    suspend fun getMyProducts(category: String): List<Product> {
         val userId = firebaseAuth.currentUser?.uid ?: ""
         return try {
-            val querySnapshot = productsCollection
-                .whereEqualTo("userId", userId)
-                .whereEqualTo("category", category)
-                .get().await()
+            val querySnapshot = if (category == "Все") {
+                productsCollection
+                    .whereEqualTo("userId", userId)
+                    .get().await()
+            } else {
+                productsCollection
+                    .whereEqualTo("userId", userId)
+                    .whereEqualTo("category", category)
+                    .get().await()
+            }
             querySnapshot.toObjects(Product::class.java)
         } catch (e: Exception) {
             // Handle exceptions
@@ -50,13 +56,19 @@ class ProductsRepository @Inject constructor(
     }
 
     // Function to get products for a specific user
-    suspend fun getOtherUsersProducts(category : String): List<Product> {
+    suspend fun getOtherUsersProducts(category: String): List<Product> {
         val userId = firebaseAuth.currentUser?.uid ?: ""
         return try {
-            val querySnapshot = productsCollection
-                .whereNotEqualTo("userId", userId)
-                .whereEqualTo("category", category)
-                .get().await()
+            val query = if (category == "Все") {
+                productsCollection
+                    .whereNotEqualTo("userId", userId)
+            } else {
+                productsCollection
+                    .whereNotEqualTo("userId", userId)
+                    .whereEqualTo("category", category)
+            }
+
+            val querySnapshot = query.get().await()
             querySnapshot.toObjects(Product::class.java)
         } catch (e: Exception) {
             // Handle exceptions
@@ -65,8 +77,9 @@ class ProductsRepository @Inject constructor(
         }
     }
 
+
     // Function to update a product
-    suspend fun updateProduct(productId: String, updatedProduct: Map<String, Any>) : String{
+    suspend fun updateProduct(productId: String, updatedProduct: Map<String, Any>): String {
         return try {
             productsCollection
                 .document(productId)
@@ -79,7 +92,7 @@ class ProductsRepository @Inject constructor(
         }
     }
 
-    suspend fun editProduct(productId: String, updatedProduct: Product) : String{
+    suspend fun editProduct(productId: String, updatedProduct: Product): String {
         return try {
             productsCollection
                 .document(productId)
@@ -132,7 +145,7 @@ class ProductsRepository @Inject constructor(
 
     }
 
-    suspend fun deleteProduct(productId: String)  : String{
+    suspend fun deleteProduct(productId: String): String {
         return try {
             firestore.collection("products")
                 .document(productId)
@@ -204,7 +217,6 @@ class ProductsRepository @Inject constructor(
             e.message.toString()
         }
     }
-
 
 
 }

@@ -15,7 +15,7 @@ class LoginUseCase(private val authRepository: AuthRepository) {
                 else it
             }
         } catch (e: Exception) {
-            e.message.toString()
+            e.localizedMessage.toString()
         }
 
     }
