@@ -11,7 +11,7 @@ class DeleteAccountUseCase(
     suspend operator fun invoke(uid: String): String {
         authRepository.deleteAccount(uid).let {
             return if (it == "Done") {
-                usersRepository.deleteUser(uid)
+                usersRepository.deleteAccount(uid)
                 usersRepository.deleteUsersProducts(uid)
                 "Done"
             } else "Error"

@@ -73,9 +73,12 @@
     <string name="no_orders">No orders</string>
     <string name="review_sent">Review sent</string>
     <string name="saved">Saved</string>
+    <string name="delete">deleted</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="no_chat">No chat</string>
     <string name="message">message</string>
+
+    <string name="users">users</string>
 
 </resources>

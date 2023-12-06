@@ -41,8 +41,9 @@ object DomainModule {
     fun provideUsersRepository(
         firestore: FirebaseFirestore,
         firebaseAuth: FirebaseAuth,
-        storage: FirebaseStorage
-    ): UsersRepository = UsersRepositoryImpl(firestore, firebaseAuth, storage)
+        storage: FirebaseStorage,
+        api: UserService
+    ): UsersRepository = UsersRepositoryImpl(firestore, firebaseAuth, storage, api)
 
     @Provides
     fun provideDeleteAccountUseCase(
