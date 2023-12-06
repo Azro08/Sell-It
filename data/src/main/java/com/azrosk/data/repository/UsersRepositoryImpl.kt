@@ -2,6 +2,7 @@ package com.azrosk.data.repository
 
 import android.net.Uri
 import android.util.Log
+import com.azrosk.data.api.UserService
 import com.azrosk.data.model.Users
 import com.azrosk.domain.repository.UsersRepository
 import com.google.android.gms.tasks.Task
@@ -15,10 +16,12 @@ import java.util.UUID
 import javax.inject.Inject
 
 class UsersRepositoryImpl @Inject constructor(
-    private val firestore: FirebaseFirestore,
+    firestore: FirebaseFirestore,
     private val firebaseAuth: FirebaseAuth,
     private val storage: FirebaseStorage,
-) : UsersRepository {
+    private val api: UserService,
+
+    ) : UsersRepository {
 
     private val usersCollection = firestore.collection("users")
     suspend fun getUsers(): List<Users> {
@@ -37,6 +40,9 @@ class UsersRepositoryImpl @Inject constructor(
             throw e
         }
     }
+
+    suspend fun deleteUser(uid: String) = api.deleteUser(uid)
+
 
     override suspend fun deleteUsersProducts(uid: String) {
         val firestore = FirebaseFirestore.getInstance()
@@ -70,7 +76,7 @@ class UsersRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteUser(userId: String): String {
+    override suspend fun deleteAccount(userId: String): String {
         val userDocument = usersCollection.document(userId)
         return try {
             userDocument.delete().await()

@@ -74,4 +74,7 @@
     <string name="no_chat">Нету чата</string>
     <string name="message">сообщение</string>
 
+    <string name="delete">удалено</string>
+    <string name="users">пользователи</string>
+
 </resources>

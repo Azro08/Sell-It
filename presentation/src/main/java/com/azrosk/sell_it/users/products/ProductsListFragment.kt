@@ -153,7 +153,7 @@ class ProductsListFragment : Fragment(R.layout.fragment_products_list) {
 
     private fun performSearch(query: String) {
         val filteredList = viewModel.filterProductList(query)
-        productsRvAdapter?.updateFoodList(filteredList)
+        productsRvAdapter?.updateProductsList(filteredList)
     }
 
     private fun getCategories() {
